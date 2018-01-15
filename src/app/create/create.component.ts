@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { DalvirooService } from '../dalviroo.service';
 
 @Component({
   selector: 'app-create',
@@ -12,7 +13,10 @@ import { Router } from '@angular/router';
 export class CreateComponent implements OnInit {
 	model = {}
 
-	constructor(private location: Location,private router: Router) {
+	constructor(private location: Location,
+				private router: Router, 
+				private dalviroo: DalvirooService) {
+
 		this.model = {name:'', quantity: 0};
 	}
 
@@ -24,7 +28,11 @@ export class CreateComponent implements OnInit {
 	}
 
 	onSubmit(){
-		this.router.navigate(['/kitchen']);
+		this.dalviroo.saveOrder('Vegetable').subscribe(data =>{
+			console.log("data");
+		},
+		err => console.log(err));
+		//this.router.navigate(['/kitchen']);
 	}
 
 }
