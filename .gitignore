@@ -5,7 +5,7 @@
 /dist-server
 /tmp
 /out-tsc
-
+app-config.js
 # dependencies
 /node_modules
 

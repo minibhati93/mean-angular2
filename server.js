@@ -1,6 +1,29 @@
 // server.js
 const express = require('express');
+const conf = require('./app-config');
 const app = express();
+
+//lets require/import the mongodb native drivers.
+
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
+const db_url = conf.MONGO_URL;
+
+
+MongoClient.connect(db_url, function (err, db) {
+  if (err) {
+    console.log('Unable to connect to the mongoDB server. Error:', err);
+  } else {
+    console.log('Connection established to', db_url);
+
+    // do some work here with the database.
+
+    //Close connection
+    db.close();
+  }
+});
+
+
 // Run the app by serving the static files
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
