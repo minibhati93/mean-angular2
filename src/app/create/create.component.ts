@@ -29,7 +29,7 @@ export class CreateComponent implements OnInit {
 
 	onSubmit(){
 		this.dalviroo.saveOrder('Vegetable').subscribe(data =>{
-			console.log("data");
+			console.log(data);
 		},
 		err => console.log(err));
 		//this.router.navigate(['/kitchen']);

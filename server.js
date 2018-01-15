@@ -21,7 +21,8 @@ app.get('*', function(req, res) {
 // New Order
 // 
 app.post('/api/new', function(req, res) {
-    console.log("Post request")
+    console.log("Post request");
+    res.send('ok');
 });
 
 // 
