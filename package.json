@@ -1,7 +1,11 @@
 {
-  "name": "mean-food-angular2",
-  "version": "0.0.0",
+  "name": "mean-angular2",
+  "version": "1.0.0",
   "license": "MIT",
+  "engines": {
+    "node": "8.9.4",
+    "npm": "5.6.0"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
