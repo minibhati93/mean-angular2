@@ -1,3 +1,32 @@
-<p>
-  create works!
-</p>
+<div class="container">
+	<button type="btn btn-primary" (click)="goBack()">Back</button><br>
+
+    
+  <div>
+    <h1>New Order</h1>
+    <form (ngSubmit)="onSubmit()" #newOrder="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name"
+               required
+               [(ngModel)]="model.name" name="name"
+               #name="ngModel">
+        <div [hidden]="name.valid || name.pristine"
+             class="alert alert-danger">
+          Name is required
+        </div>
+      </div>
+ 
+      <div class="form-group">
+        <label for="alterEgo">Quantity</label>
+        <input type="number" class="form-control" id="quantity"
+               [(ngModel)]="model.quantity" name="quantity">
+      </div>
+ 
+ 
+      <button type="submit" class="btn btn-success" [disabled]="!newOrder.form.valid">Submit</button>
+    </form>
+  </div>
+ 
+  
+</div>
