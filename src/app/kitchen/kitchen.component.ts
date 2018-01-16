@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateComponent } from '../create/create.component';
 import { DalvirooService } from '../dalviroo.service';
+import 'rxjs/Rx' ;
 
 @Component({
   selector: 'app-kitchen',
@@ -41,7 +42,9 @@ export class KitchenComponent implements OnInit {
 
 	download(){
 		this.dalviroo.getCSV().subscribe(data => {
-			console.log(data);
+			var blob = new Blob([data], { type: 'text/csv' });
+			var url= window.URL.createObjectURL(blob);
+			window.open(url);
 		});
 
 	}

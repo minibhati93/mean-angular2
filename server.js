@@ -174,12 +174,14 @@ app.get('/api/export', function(req, res) {
 
         res.setHeader("Content-Disposition", 'attachment; filename=report.csv');
 
-        fs.writeFile('report.csv', data, function(err) {
-          if (err) throw err;
-          console.log('file saved');
-          res.download(path.join(__dirname + '/report.csv'));
+        res.status(200).send(JSON.stringify(data));
 
-        });
+        // fs.writeFile('report.csv', data, function(err) {
+        //   if (err) throw err;
+        //   console.log('file saved');
+        //   res.send(data);
+
+        // });
         // 
         // const doc = new PDFDocument()
         // let filename = "report.pdf";
