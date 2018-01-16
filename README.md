@@ -21,3 +21,10 @@
 └── .gitignore
 
 ```
+
+## API docs
+
+### Create a New Order ```/api/create```
+### Get All Orders ```/api/orders```
+### Update Order Details ```/api/orders/:id```
+
