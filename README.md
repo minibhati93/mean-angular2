@@ -19,7 +19,6 @@
 ├── README.md
 ├── node_modules
 ├── package.json
-├── .travis.yml
 └── .gitignore
 
 ```
