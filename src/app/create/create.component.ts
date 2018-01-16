@@ -33,12 +33,8 @@ export class CreateComponent implements OnInit {
 		this.dalviroo.createOrder(this.model).subscribe(data =>{
 			console.log("Order successfully placed");
 			this.message = "Order successfully placed";
+			this.router.navigate(["/kitchen"]);
 		});
-		// this.dalviroo.saveOrder('Vegetable').subscribe(data =>{
-		// 	console.log(data);
-		// },
-		// err => console.log(err));
-		// //this.router.navigate(['/kitchen']);
 	}
 
 }

@@ -10,26 +10,39 @@ import { DalvirooService } from '../dalviroo.service';
 })
 export class PredictComponent implements OnInit {
 
-	model = {};
+	model:any = {};
 	message:string;
 	closed = false;
-	dishes={};
+	orders;
 
 	constructor(private location: Location,
 				private router: Router, 
 				private dalviroo: DalvirooService) {
 
+		this.model={name: '', predicted: 0, id: ''};
 	}
 
 	ngOnInit() {
-		this.model={dish: 'A', prediction:1};
+		this.dalviroo.getOrders().subscribe( data => {
+			this.orders = data;
+		});
 	}
 
 	goBack(): void {
 		this.location.back();
 	}
 
-	typeChanged(){
+	onSubmit(){
+		console.log(JSON.stringify(this.model));
+		this.dalviroo.updateOrder(this.model.id, {predicted: this.model.predicted}).subscribe(data => {
+			console.log("Predicted value set");
+			this.router.navigate(["/kitchen"]);
+		});
+	}
+
+	onChange(newValue) {
+		// console.log(newValue);
+		this.model.id = newValue;
 	}
 
 }

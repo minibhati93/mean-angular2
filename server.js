@@ -99,16 +99,20 @@ app.get('/api/orders', function(req, res) {
 });
 
 /* "/api/predict"
- *    PUT: update predicted value of the order
+ *    PUT: update created value of the order
 */
+
 app.put("/api/orders/:id", function(req, res) {
+  
   var updateDoc = req.body;
+  
   delete updateDoc._id;
 
-  db_handle.collection(KITCHEN_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, { $set: {created: updateDoc.created }}, function(err, doc) {
+  db_handle.collection(KITCHEN_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, { $set: updateDoc }, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update contact");
-    } else {
+    } 
+    else {
       updateDoc._id = req.params.id;
       res.status(200).json(updateDoc);
     }
