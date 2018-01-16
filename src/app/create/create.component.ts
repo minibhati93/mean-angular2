@@ -9,15 +9,16 @@ import { DalvirooService } from '../dalviroo.service';
   styleUrls: ['./create.component.css']
 })
 
-
 export class CreateComponent implements OnInit {
-	model = {}
+	model = {};
+	message:string;
+	closed = false;
 
 	constructor(private location: Location,
 				private router: Router, 
 				private dalviroo: DalvirooService) {
 
-		this.model = {name:'', quantity: 0};
+		this.model = { name: '', quantity: 0, created:0, predicted: 0 };
 	}
 
 	ngOnInit() {
@@ -28,11 +29,16 @@ export class CreateComponent implements OnInit {
 	}
 
 	onSubmit(){
-		this.dalviroo.saveOrder('Vegetable').subscribe(data =>{
-			console.log(data);
-		},
-		err => console.log(err));
-		//this.router.navigate(['/kitchen']);
+		console.log(this.model);
+		this.dalviroo.createOrder(this.model).subscribe(data =>{
+			console.log("Order successfully placed");
+			this.message = "Order successfully placed";
+		});
+		// this.dalviroo.saveOrder('Vegetable').subscribe(data =>{
+		// 	console.log(data);
+		// },
+		// err => console.log(err));
+		// //this.router.navigate(['/kitchen']);
 	}
 
 }
