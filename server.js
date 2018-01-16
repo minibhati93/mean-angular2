@@ -98,17 +98,19 @@ app.get('/api/orders', function(req, res) {
     });
 });
 
-// app.get("/api/orders/:id", function(req, res) {
-
-//   db_handle.collection(KITCHEN_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
-//     if (err) {
-//       handleError(res, err.message, "Failed to get order");
-//     } else {
-//       res.status(200).json(doc);
-//     }
-//   });
-// });
-
 /* "/api/predict"
  *    PUT: update predicted value of the order
 */
+app.put("/api/orders/:id", function(req, res) {
+  var updateDoc = req.body;
+  delete updateDoc._id;
+
+  db_handle.collection(KITCHEN_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, { $set: {created: updateDoc.created }}, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to update contact");
+    } else {
+      updateDoc._id = req.params.id;
+      res.status(200).json(updateDoc);
+    }
+  });
+});

@@ -13,6 +13,14 @@
         <th>Status</th>
       </tr>
     </thead>
-
+    <tbody>
+      <tr *ngFor="let tablerow of orders">
+          <td>{{ tablerow.name }}</td>
+          <td>{{ tablerow.quantity }}</td>
+          <td>{{ tablerow.created }}</td>
+          <td>{{ tablerow.predicted }}</td>
+          <td><button class="btn btn-primary" (click)="updateCreated(tablerow._id)">Done</button></td>
+      </tr>
+    </tbody>
   
 </table>

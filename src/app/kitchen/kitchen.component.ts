@@ -26,4 +26,21 @@ export class KitchenComponent implements OnInit {
 		});
 	}
 
+	updateCreated(id){
+		let that = this;
+		this.orders.forEach(function(order) { 
+			if(order._id == id) {
+				order.created+=1;
+				that.dalviroo.updateOrder(id, {created: order.created}).subscribe(data => {
+					console.log("Order is Ready");
+				});
+			}
+		});
+
+		// this.dalviroo.updateOrder(id).subscribe(data => {
+		// 	console.log("Order is Ready");
+		// });
+
+	}
+
 }
