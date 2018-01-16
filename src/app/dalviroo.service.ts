@@ -24,9 +24,7 @@ export class DalvirooService {
   	}
 
     getOrders(){
-      return this.http.get('/api/orders')
-            .map(res => res.json())
-            .catch(this.handleError);
+      return this.http.get('/api/orders').map(res => res.json()).catch(this.handleError);
     }
 
     handleError(error) {

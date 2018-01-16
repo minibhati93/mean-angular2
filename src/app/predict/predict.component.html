@@ -1,3 +1,29 @@
-<p>
-  predict works!
-</p>
+<div class="container">
+	<button type="btn btn-primary" (click)="goBack()">Back</button><br>
+
+    
+  <div>
+    <h1>New Order</h1>
+    <form (ngSubmit)="onSubmit()" #setPrediction="ngForm">
+      <div class="form-group">
+        <label>Choose Order</label>
+        <select class="form-control">
+     	 <option value="football">Sports</option>
+      	 <option value="cricket">Cricket</option>
+  		</select>
+      </div>
+ 
+      <div class="form-group">
+        <label for="prediction">Prediction</label>
+        <input type="number" min="0" class="form-control" id="quantity" name="prediction">
+      </div>
+ 
+ 
+      <button type="submit" class="btn btn-success" [disabled]="!setPrediction.form.valid">Submit</button>
+    </form>
+  </div>
+ 
+  
+</div>
+
+<ngb-alert *ngIf="message && !closed" (close)="closed=true">{{message}}</ngb-alert>

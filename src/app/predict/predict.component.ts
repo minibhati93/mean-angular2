@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { DalvirooService } from '../dalviroo.service';
 
 @Component({
   selector: 'app-predict',
@@ -7,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PredictComponent implements OnInit {
 
-  constructor() { }
+	model = {};
+	message:string;
+	closed = false;
+	dishes={};
 
-  ngOnInit() {
-  }
+	constructor(private location: Location,
+				private router: Router, 
+				private dalviroo: DalvirooService) {
+
+	}
+
+	ngOnInit() {
+		this.model={dish: 'A', prediction:1};
+	}
+
+	goBack(): void {
+		this.location.back();
+	}
+
+	typeChanged(){
+	}
 
 }

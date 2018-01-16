@@ -60,7 +60,7 @@ function handleError(res, reason, message, code) {
 // KITCHEN API ROUTES  ------------------------------------------------
 
 /*  "/api/create"
- *    POST: creates a new order
+ *    POST: create a new order
 */
 
 app.post('/api/create', function(req, res) {
@@ -96,3 +96,7 @@ app.get('/api/orders', function(req, res) {
       }
     });
 });
+
+/* "/api/predict"
+ *    PUT: update predicted value of the order
+*/
