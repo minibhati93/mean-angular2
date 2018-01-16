@@ -15,10 +15,13 @@ export class KitchenComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		
 		this.dalviroo.getOrders().subscribe( data => {
 			this.orders = data;
 			if(!this.orders){
 				alert("Seems like you don't have any orders. Start by creating one now");
+			}
+			else{
 			}
 		});
 	}

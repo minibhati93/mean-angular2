@@ -20,12 +20,12 @@ const path = require('path');
 // ...
 // For all GET requests, send back index.html
 // so that PathLocationStrategy can be used
-app.get('*', function(req, res) {
+app.get('/kitchen', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
-var database;
+var db_handle;
 
 
 MongoClient.connect(db_url, function (err, client) {
@@ -34,7 +34,7 @@ MongoClient.connect(db_url, function (err, client) {
   }
   else {
     // Save database object from the callback for reuse.
-    database = client.db('dalviroo');
+    db_handle = client.db('dalviroo');
     console.log("Database connection ready");
 
     // Start the app by listening on the default
@@ -70,7 +70,7 @@ app.post('/api/create', function(req, res) {
       handleError(res, "Invalid user input", "Must provide an order.", 400);
     }
 
-    database.collection(KITCHEN_COLLECTION).insertOne(newOrder, function(err, doc) {
+    db_handle.collection(KITCHEN_COLLECTION).insertOne(newOrder, function(err, doc) {
       if (err) {
         handleError(res, err.message, "Failed to create new order.");
       }
@@ -85,17 +85,29 @@ app.post('/api/create', function(req, res) {
 */
 
 app.get('/api/orders', function(req, res) {
-    console.log("Reached here");
-    database.collection(KITCHEN_COLLECTION).find({}).toArray(function(err, docs) {
-      if (err) {
-        console.log("error!")
+
+    db_handle.collection(KITCHEN_COLLECTION).find({}).toArray(function(err, result) {
+
+      if(err){
         handleError(res, err.message, "Failed to get orders.");
-      } else {
-        console.log("success!")
-        res.status(200).json(docs);
       }
+      else{
+        res.send(JSON.stringify(result));
+      }
+
     });
 });
+
+// app.get("/api/orders/:id", function(req, res) {
+
+//   db_handle.collection(KITCHEN_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+//     if (err) {
+//       handleError(res, err.message, "Failed to get order");
+//     } else {
+//       res.status(200).json(doc);
+//     }
+//   });
+// });
 
 /* "/api/predict"
  *    PUT: update predicted value of the order

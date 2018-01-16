@@ -24,13 +24,25 @@ export class DalvirooService {
   	}
 
     getOrders(){
-      return this.http.get('/api/orders').map(res => res.json()).catch(this.handleError);
+        return this.http.get('/api/orders')
+                        .map(res => res.json())
+                        .catch(this.handleError);
     }
 
     handleError(error) {
         console.log(JSON.stringify(error));
         return Observable.throw('Server error');
     }
+
+    updateOrder(body){
+        // let bodyString = JSON.stringify(body); // Stringify payload
+        // let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        // let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+        // return this.http.put(`${this.commentsUrl}/${body['id']}`, body, options) // ...using put request
+        //                  .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+        //                  .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+    }   
 
 
 }
