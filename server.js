@@ -70,14 +70,39 @@ app.post('/api/create', function(req, res) {
       handleError(res, "Invalid user input", "Must provide an order.", 400);
     }
 
-    db_handle.collection(KITCHEN_COLLECTION).insertOne(newOrder, function(err, doc) {
-      if (err) {
-        handleError(res, err.message, "Failed to create new order.");
+    //find if an order exists, we don't want duplicate orders 
+
+    db_handle.collection(KITCHEN_COLLECTION).find({ $query: {name: newOrder.name }}).toArray(function(err, doc){ 
+      
+      if(doc == null ||  doc == '' || !doc){ // Insert the new order
+        db_handle.collection(KITCHEN_COLLECTION).insertOne(newOrder, function(err, doc) {
+            if (err) {
+              handleError(res, err.message, "Failed to create new order.");
+            }
+            else {
+              res.status(201).json(doc.ops[0]);
+            }
+        });
       }
-      else {
-        res.status(201).json(doc.ops[0]);
+      else if(doc){ // This order exists merge the quanitity
+        let existingOrder = doc[0];
+        // console.log(existingOrder);
+        let newQuantity = parseInt(existingOrder.quantity)+parseInt(newOrder.quantity);
+        
+        let updateDoc = {quantity: newQuantity };
+        
+        db_handle.collection(KITCHEN_COLLECTION).updateOne({_id: new ObjectID(existingOrder._id)}, { $set: updateDoc }, function(err, doc) {
+          if (err) {
+            handleError(res, err.message, "Failed to update order");
+          } 
+          else {
+            updateDoc._id = existingOrder._id;
+            res.status(200).json(updateDoc);
+          }
+        });
       }
-  });
+
+    }); 
 });
 
 /*  "/api/orders"
@@ -98,8 +123,8 @@ app.get('/api/orders', function(req, res) {
     });
 });
 
-/* "/api/predict"
- *    PUT: update created value of the order
+/* "/api/orders/:id"
+ *    PUT: update value of the order
 */
 
 app.put("/api/orders/:id", function(req, res) {
@@ -110,7 +135,7 @@ app.put("/api/orders/:id", function(req, res) {
 
   db_handle.collection(KITCHEN_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, { $set: updateDoc }, function(err, doc) {
     if (err) {
-      handleError(res, err.message, "Failed to update contact");
+      handleError(res, err.message, "Failed to update order");
     } 
     else {
       updateDoc._id = req.params.id;

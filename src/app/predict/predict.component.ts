@@ -19,7 +19,7 @@ export class PredictComponent implements OnInit {
 				private router: Router, 
 				private dalviroo: DalvirooService) {
 
-		this.model={name: '', predicted: 0, id: ''};
+		this.model={name: '', predicted: 1, id: ''};
 	}
 
 	ngOnInit() {

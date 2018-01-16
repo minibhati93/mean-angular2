@@ -18,7 +18,7 @@ export class CreateComponent implements OnInit {
 				private router: Router, 
 				private dalviroo: DalvirooService) {
 
-		this.model = { name: '', quantity: 0, created:0, predicted: 0 };
+		this.model = { name: '', quantity: 1, created:0, predicted: 0 };
 	}
 
 	ngOnInit() {
@@ -29,7 +29,7 @@ export class CreateComponent implements OnInit {
 	}
 
 	onSubmit(){
-		console.log(this.model);
+		// console.log(this.model);
 		this.dalviroo.createOrder(this.model).subscribe(data =>{
 			console.log("Order successfully placed");
 			this.message = "Order successfully placed";
