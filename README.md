@@ -30,4 +30,9 @@
 * Get All Orders ```/api/orders```
 * Update Order Details ```/api/orders/:id```
 
+## Libraries & Modules Used
+
+* Angular 2
+* Ng-Bootstrap
+* [json2csv](https://www.npmjs.com/package/json2csv)
 

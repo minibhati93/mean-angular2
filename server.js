@@ -117,7 +117,7 @@ app.get('/api/orders', function(req, res) {
         handleError(res, err.message, "Failed to get orders.");
       }
       else{
-        res.send(JSON.stringify(result));
+        res.status(200).send(JSON.stringify(result));
       }
 
     });
@@ -143,3 +143,59 @@ app.put("/api/orders/:id", function(req, res) {
     }
   });
 });
+
+
+/*
+ *
+ */
+
+const json2csv = require('json2csv');
+const fs = require('fs');
+const PDFDocument = require('pdfkit')
+
+
+app.get('/api/export', function(req, res) {
+  console.log("exporting to csv.....");
+
+  db_handle.collection(KITCHEN_COLLECTION).find({}).toArray(function(err, docs) {
+
+      if(err){
+        handleError(res, err.message, "Failed to get orders.");
+      }
+      else{
+        // Convert to CSV
+        var fields = ['name', 'created', 'predicted'];
+        var fieldNames = ['Name', 'Produced', 'Predicted'];
+        var data = json2csv({ data: docs, fields: fields, fieldNames: fieldNames });
+        console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=');
+        // EXPORT FILE
+
+        res.setHeader('Content-Type', 'text/csv');
+
+        res.setHeader("Content-Disposition", 'attachment; filename=report.csv');
+
+        fs.writeFile('report.csv', data, function(err) {
+          if (err) throw err;
+          console.log('file saved');
+          res.download(path.join(__dirname + '/report.csv'));
+
+        });
+        // 
+        // const doc = new PDFDocument()
+        // let filename = "report.pdf";
+        // // Setting response to 'attachment' (download).
+        // // If you use 'inline' here it will automatically open the PDF
+        // res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"');
+        // res.setHeader('Content-type', 'application/pdf');
+        // const content = data;
+        // doc.y = 300;
+        // doc.text(content, 50, 50);
+        // doc.pipe(res);
+        // doc.end()
+      }
+
+    });
+
+});
+
+

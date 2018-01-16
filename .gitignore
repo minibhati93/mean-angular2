@@ -8,7 +8,7 @@
 app-config.js
 # dependencies
 /node_modules
-
+report.csv
 # IDEs and editors
 /.idea
 .project

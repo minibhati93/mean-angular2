@@ -40,7 +40,10 @@ export class KitchenComponent implements OnInit {
 	}
 
 	download(){
-		
+		this.dalviroo.getCSV().subscribe(data => {
+			console.log(data);
+		});
+
 	}
 
 }
