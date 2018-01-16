@@ -37,10 +37,10 @@ export class KitchenComponent implements OnInit {
 			}
 		});
 
-		// this.dalviroo.updateOrder(id).subscribe(data => {
-		// 	console.log("Order is Ready");
-		// });
+	}
 
+	download(){
+		
 	}
 
 }
