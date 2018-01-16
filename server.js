@@ -1,13 +1,12 @@
 // server.js
 const express = require('express');
-const conf = require('./app-config');
 const app = express();
 
 //lets require/import the mongodb native drivers.
 
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
-const db_url = conf.MONGO_URL;
+const db_url = "mongodb://test:test@ds257627.mlab.com:57627/dalviroo"
 
 
 MongoClient.connect(db_url, function (err, db) {
@@ -52,4 +51,6 @@ app.post('/api/new', function(req, res) {
 // 
 // Start the app by listening on the default
 // Heroku port
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`Server is listening`);
+});
