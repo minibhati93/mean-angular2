@@ -36,3 +36,10 @@
 * Ng-Bootstrap
 * [json2csv](https://www.npmjs.com/package/json2csv)
 
+## How to run locally?
+
+* Clone the repo.
+* Run `npm install`
+* Run the command `npm run postinstall  && npm run start`
+* Go the browser and open `localhost:8080`
+
