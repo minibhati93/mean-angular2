@@ -41,5 +41,5 @@
 * Clone the repo.
 * Run `npm install`
 * Run the command `npm run postinstall  && npm run start`
-* Go the browser and open `localhost:8080`
+* Go to the browser and open `localhost:8080`
 
