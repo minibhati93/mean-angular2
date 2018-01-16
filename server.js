@@ -145,13 +145,11 @@ app.put("/api/orders/:id", function(req, res) {
 });
 
 
-/*
- *
+/* "/api/export"
+ *  GET: return the csv data
  */
 
 const json2csv = require('json2csv');
-const fs = require('fs');
-const PDFDocument = require('pdfkit')
 
 
 app.get('/api/export', function(req, res) {
@@ -175,25 +173,6 @@ app.get('/api/export', function(req, res) {
         res.setHeader("Content-Disposition", 'attachment; filename=report.csv');
 
         res.status(200).send(JSON.stringify(data));
-
-        // fs.writeFile('report.csv', data, function(err) {
-        //   if (err) throw err;
-        //   console.log('file saved');
-        //   res.send(data);
-
-        // });
-        // 
-        // const doc = new PDFDocument()
-        // let filename = "report.pdf";
-        // // Setting response to 'attachment' (download).
-        // // If you use 'inline' here it will automatically open the PDF
-        // res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"');
-        // res.setHeader('Content-type', 'application/pdf');
-        // const content = data;
-        // doc.y = 300;
-        // doc.text(content, 50, 50);
-        // doc.pipe(res);
-        // doc.end()
       }
 
     });

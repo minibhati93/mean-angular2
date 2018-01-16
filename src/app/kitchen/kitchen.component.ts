@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CreateComponent } from '../create/create.component';
 import { DalvirooService } from '../dalviroo.service';
 import 'rxjs/Rx' ;
@@ -11,6 +11,8 @@ import 'rxjs/Rx' ;
 export class KitchenComponent implements OnInit {
 
 	orders;
+
+	@ViewChild('export') el:ElementRef;
 	constructor(private dalviroo: DalvirooService) {
 
 	}
@@ -44,7 +46,9 @@ export class KitchenComponent implements OnInit {
 		this.dalviroo.getCSV().subscribe(data => {
 			var blob = new Blob([data], { type: 'text/csv' });
 			var url= window.URL.createObjectURL(blob);
-			window.open(url);
+			this.el.nativeElement.download = "report.csv";
+			this.el.nativeElement.href = url;
+			this.el.nativeElement.click();
 		});
 
 	}
