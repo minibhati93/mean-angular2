@@ -1,4 +1,4 @@
-# Food Delivery System [![Build Status](https://travis-ci.org/minibhati93/mean-angular2.svg?branch=master)](https://travis-ci.org/minibhati93/mean-angular2)
+# Food Delivery System
 
 ## Basic File Structure
 
@@ -29,6 +29,7 @@
 * Create a New Order ```/api/create```
 * Get All Orders ```/api/orders```
 * Update Order Details ```/api/orders/:id```
+* Export as CSV ```/api/export```
 
 ## Libraries & Modules Used
 

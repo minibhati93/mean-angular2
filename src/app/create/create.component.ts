@@ -18,7 +18,7 @@ export class CreateComponent implements OnInit {
 				private router: Router, 
 				private dalviroo: DalvirooService) {
 
-		this.model = { name: '', quantity: 1, created:0, predicted: 0 };
+		this.model = { name: '', quantity: 1, created:1, predicted: 0 };
 	}
 
 	ngOnInit() {
