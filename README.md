@@ -7,7 +7,9 @@
 │   ├── create
 │   │   ├── create.component.*
 │   ├── predict
+│   │   ├── predict.component.*
 │   ├── kitchen
+│   │   ├── kitchen.component.*
 │   ├── app.component.*
 │   ├── app.module.ts
 │   ├── app-routing.module.ts
@@ -24,7 +26,8 @@
 
 ## API docs
 
-### Create a New Order ```/api/create```
-### Get All Orders ```/api/orders```
-### Update Order Details ```/api/orders/:id```
+* Create a New Order ```/api/create```
+* Get All Orders ```/api/orders```
+* Update Order Details ```/api/orders/:id```
+
 
